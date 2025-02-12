@@ -1,10 +1,10 @@
-import Login from "./components/login";
+
+import Dashboard from "./components/dashboard/Dashboard";
 
 export default function Home() {
-  return (
-    <>
+  return (<>
     <div>Home</div>
-    <Login />
-    </>
+    <Dashboard/>
+  </>
   )
 }
