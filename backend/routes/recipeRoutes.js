@@ -4,6 +4,7 @@ const { Inventory } = require("../models/inventoryModel");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
+
 router.get("/", authMiddleware, async (req, res) => {
   const inventory = await Inventory.findOne({ userId: req.user.id });
   if (!inventory) return res.json([]);

@@ -27,9 +27,30 @@ router.post("/", authMiddleware, async (req, res) => {
 });
 
 router.get("/", authMiddleware, async (req, res) => {
-  const inventory = await Inventory.findOne({
-    userId: req.user.id,
-  }).populate("ingredients.ingredientId");
-  res.json(inventory);
+  try {
+    const inventory = await Inventory.findOne({
+      userId: req.user.id,
+    }).populate("ingredients.ingredientId", "name");
+
+    if (!inventory)
+      return res.status(404).json({ message: "No inventory found" });
+
+    // Ensure all ingredients have a valid name
+    const formattedInventory = {
+      ...inventory.toObject(),
+      ingredients: inventory.ingredients
+        .filter((item) => item.ingredientId) // Remove items with missing ingredientId
+        .map((item) => ({
+          ingredientId: item.ingredientId._id,
+          name: item.ingredientId.name, // Include name
+          quantity: item.quantity,
+        })),
+    };
+    console.log(formattedInventory);
+    res.json(formattedInventory);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error", error });
+  }
 });
 module.exports = router;
