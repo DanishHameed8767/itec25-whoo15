@@ -1,6 +1,7 @@
 import './dashboard.css';
 import '../Ingredients/IngredientList.jsx'
 import IngredientList from '../Ingredients/IngredientList.jsx';
+import RecipesList  from '../recepies/RecipesList.jsx';
 
 export default function Dashboard ()
 {
@@ -407,8 +408,8 @@ export default function Dashboard ()
             </button>
           </div>
         </div>
-        <IngredientList />
-        
+        {/* <IngredientList /> */}
+        <RecipesList />
 
         
 
