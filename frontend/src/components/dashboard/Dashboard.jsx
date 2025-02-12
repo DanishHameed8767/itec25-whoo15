@@ -1,4 +1,6 @@
 import './dashboard.css';
+import '../Ingredients/IngredientList.jsx'
+import IngredientList from '../Ingredients/IngredientList.jsx';
 
 export default function Dashboard ()
 {
@@ -405,8 +407,9 @@ export default function Dashboard ()
             </button>
           </div>
         </div>
-        <canvas className="my-4 w-100" id="myChart" width={900} height={380} />
-        <h2>Available Recipies</h2>
+        <IngredientList />
+        
+
         
 
       </main>
