@@ -3,7 +3,7 @@ const IngredientCard = ({ ingredient, onRemove }) => {
       <div className="card" style={{ width: "18rem" }}>
         <div className="card-body">
           {/* Ingredient Title */}
-          <h5 className="card-title">{ingredient.title}</h5>
+          <h5 className="card-title">{ingredient.name}</h5>
           
           {/* Expiry Date */}
           <p className="card-text">Expiry Date: {ingredient.expiryDate}</p>

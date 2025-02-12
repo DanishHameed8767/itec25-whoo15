@@ -4,7 +4,7 @@ const inventorySchema = new mongoose.Schema({
   userId: String,
   ingredients: [
     {
-      ingredientId: { type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" },
+      ingredientId: { type: mongoose.Schema.Types.ObjectId, ref: "Ingredient",required:true },
       quantity: Number,
       expiryDate: {
         type: Date,

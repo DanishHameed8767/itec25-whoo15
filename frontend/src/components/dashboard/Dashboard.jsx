@@ -1,8 +1,7 @@
+import { Link } from 'react-router-dom';
 import './dashboard.css';
-import '../Ingredients/IngredientList.jsx'
-import IngredientList from '../Ingredients/IngredientList.jsx';
 
-export default function Dashboard ()
+export default function Dashboard ({children})
 {
     return (
         <div>
@@ -248,15 +247,15 @@ export default function Dashboard ()
                 </a>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link d-flex align-items-center gap-2"
-                  href="#"
+                  to="/inventory"
                 >
                   <svg className="bi">
                     <use xlinkHref="#cart" />
                   </svg>
                   View Inventory
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a
@@ -407,7 +406,7 @@ export default function Dashboard ()
             </button>
           </div>
         </div>
-        <IngredientList />
+        {children}
         
 
         
