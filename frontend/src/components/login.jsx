@@ -1,5 +1,5 @@
-// src/components/Login.jsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,48 +36,52 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="my-4 text-center">Login to Smart Pantry</h2>
+    <div className="container vh-100 d-flex align-items-center justify-content-center">
+      <div className="row justify-content-center w-100">
+        <div className="col-md-6">
+          <div className="card p-4 shadow-sm">
+            <h2 className="text-center mb-4 text-nowrap">Login to Smart Pantry</h2>
 
-      {error && <div className="alert alert-danger">{error}</div>}
+            {error && <div className="alert alert-danger">{error}</div>}
 
-      <form onSubmit={handleSubmit} className="w-50 mx-auto">
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="form-control"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
+              </button>
+            </form>
+
+            {/* Signup Link */}
+            <p className="text-center mt-3">
+              Don't have an account? <Link to="/register" className="text-primary">Sign Up</Link>
+            </p>
+
+          </div>
         </div>
-
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="form-control"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default Login
+export default Login;
