@@ -19,6 +19,10 @@ const pantryReducer = (state, action) => {
           (item) => item.ingredientId !== action.payload
         ),
       };
+    case "ADD_NOTIFICATION":
+      return { ...state, notifications: [...state.notifications, action.payload] };
+    case "REMOVE_NOTIFICATION":
+      return { ...state, notifications: state.notifications.filter(n => n.id !== action.payload) };
     default:
       return state;
   }

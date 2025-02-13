@@ -10,6 +10,7 @@ import IngredientList from './components/Ingredients/IngredientList';
 import RecipesList from './components/recepies/RecipesList';
 import PublicRoute from './components/PublicRoute';
 import Protected from './components/Protected';
+import Alert from './components/Alert';
 
 function App() {
 
