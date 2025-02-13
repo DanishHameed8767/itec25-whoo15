@@ -10,7 +10,7 @@ export default function Dashboard({ children }) {
     <div>
       <>
         <Alert />
-        <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+        <svg xmlns="http://www.w3.org/2000/svg" className="d-none" style={{fill:'white'}}>
           <symbol id="check2" viewBox="0 0 16 16">
             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
           </symbol>
@@ -27,14 +27,14 @@ export default function Dashboard({ children }) {
         </svg>
         <div className="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
           <button
-            className="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            className="btn btn-white py-2 dropdown-toggle d-flex align-items-center"
             id="bd-theme"
             type="button"
             aria-expanded="false"
             data-bs-toggle="dropdown"
             aria-label="Toggle theme (auto)"
           >
-            <svg className="bi my-1 theme-icon-active" width="1em" height="1em">
+            <svg className="bi my-1 theme-icon-active" width="1em" height="1em" style={{fill:'white'}}>
               <use href="#circle-half" />
             </svg>
             <span className="visually-hidden" id="bd-theme-text">
@@ -156,7 +156,7 @@ export default function Dashboard({ children }) {
         <header
           className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
           data-bs-theme="dark"
-          style={{zIndex:'-1'}}
+        
         >
           <a
             className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
@@ -169,28 +169,13 @@ export default function Dashboard({ children }) {
               <button
                 className="nav-link px-3 text-white"
                 type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSearch"
-                aria-controls="navbarSearch"
-                aria-expanded="false"
-                aria-label="Toggle search"
-              >
-                <svg className="bi">
-                  <use xlinkHref="#search" />
-                </svg>
-              </button>
-            </li>
-            <li className="nav-item text-nowrap">
-              <button
-                className="nav-link px-3 text-white"
-                type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#sidebarMenu"
                 aria-controls="sidebarMenu"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
-                <svg className="bi">
+                <svg className="bi" fill='white'>
                   <use xlinkHref="#list" />
                 </svg>
               </button>
@@ -330,31 +315,7 @@ export default function Dashboard({ children }) {
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Dashboard</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                  <div className="btn-group me-2">
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary"
-                    >
-                      Share
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary"
-                    >
-                      Export
-                    </button>
-                  </div>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1"
-                  >
-                    <svg className="bi">
-                      <use xlinkHref="#calendar3" />
-                    </svg>
-                    This week
-                  </button>
-                </div>
+                
               </div>
               {children}
 
