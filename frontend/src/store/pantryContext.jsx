@@ -145,6 +145,23 @@ export const PantryProvider = ({ children }) => {
     }
   };
 
+  const selectRecipe = async (recipeId) => {
+    try {
+      const res = await fetch(`${API_URL}/recipes/select/${recipeId}`, {
+        method: "POST",
+        headers: { Authorization: `${getToken()}` },
+      });
+      if (!res.ok) {
+        throw new Error("Failed to fetch recipe");
+      }
+      const data = await res.json();
+      dispatch({ type: "SELECT_RECIPE", payload: data });
+    } catch (error) {
+      addNotification("Not Enought ingredients", "error");
+      console.error("Error selecting recipe:", error);
+    }
+  };
+
   // 📌 Add a Recipe
   const addRecipe = async (name, description, ingredients) => {
     try {
@@ -180,6 +197,7 @@ export const PantryProvider = ({ children }) => {
         fetchRecipes,
         addRecipe,
         fetchRecipesByInventory,
+        selectRecipe
       }}
     >
       {children}

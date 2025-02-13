@@ -8,7 +8,7 @@ export default function Alert() {
         <div>
             {notifications.map((notif) => (
                 <div key={notif.id} className={`alert alert-${notif.type} position-absolute`} style={{top:'50px',right:'30px',zIndex:'10'}}>
-                    {notif.message} This
+                    {notif.message}
                 </div>
             ))}
         </div>
