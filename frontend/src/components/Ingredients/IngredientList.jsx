@@ -1,18 +1,19 @@
 import { useContext, useEffect } from "react";
-import IngredientCard from "./InventoryItem";
+import IngredientCard from "./IngredientItem";
 import { PantryContext } from "../../store/pantryContext";
 
 export default function IngredientList() {
-  const { inventory, fetchInventory, deleteInventoryItem } = useContext(PantryContext);
+  const { ingredients, fetchIngredients, addInventoryItem } = useContext(PantryContext);
 
   useEffect(() => {
-    fetchInventory("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWNhOWVlZjA3ZjEwYTdkNjBiMzdhZCIsImlhdCI6MTczOTM4NzI5MywiZXhwIjoxNzM5MzkwODkzfQ.gdkmoqmjd8zUwruEXzhnRW9PpKqmIe7__Z4UDdD6G5c"); // Fetch inventory from the backend
+    fetchIngredients(); // Fetch inventory from the backend
   }, []);
 
   // Remove ingredient from inventory
-  const handleRemove = async (ingredientId) => {
+  const handleAdd = async (ingredientId) => {
     try {
-      await deleteInventoryItem(ingredientId); // Call API to delete
+      const quantity = 10;
+      await addInventoryItem(ingredientId, quantity); // Call API to delete
     } catch (error) {
       console.error("Error deleting ingredient:", error);
     }
@@ -22,10 +23,10 @@ export default function IngredientList() {
     <div className="container mt-4">
       <h2 className="text-center mb-4">Kitchen inventory</h2>
       <div className="row">
-        {inventory.length > 0 ? (
-          inventory.map((ingredient) => (
+        {ingredients.length > 0 ? (
+          ingredients.map((ingredient) => (
             <div key={ingredient._id} className="col-md-4 mb-3">
-              <IngredientCard ingredient={ingredient} onRemove={() => handleRemove(ingredient._id)} />
+              <IngredientCard ingredient={ingredient} onAdd={() => handleAdd(ingredient._id)} />
             </div>
           ))
         ) : (

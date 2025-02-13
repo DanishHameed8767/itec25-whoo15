@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link from React Router
+import { AuthContext } from "../store/authContext";
 
 const SignUp = () => {
+  const { login } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,15 +16,38 @@ const SignUp = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const handleSubmit = (e) => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    console.log("Form submitted", formData);
+
+    try {
+      const response = await fetch(`${API_URL}/user/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+
+      localStorage.setItem('token', data.token); // Save JWT token
+      login(data);
+      window.location.href = '/'; // Redirect user
+    } catch (error) {
+      setLoading(false);
+      setError(error.message || 'An error occurred');
+    }
   };
+  console.log("Form submitted", formData);
 
   return (
     <div className="container vh-100 d-flex align-items-center justify-content-center">
@@ -28,6 +55,7 @@ const SignUp = () => {
         <div className="col-md-6">
           <div className="card p-4 shadow-sm">
             <h2 className="text-center mb-4">Signup</h2>
+            {error && <div className="alert alert-danger">{error}</div>}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label className="form-label">Name</label>

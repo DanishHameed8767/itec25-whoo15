@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api/user", authRouter);
 app.use("/api/ingredients", ingredientsRouter);
 app.use("/api/user/inventory", inventoryRouter);
-app.use("/api/recipes", recipeRouter);
+app.use("/api", recipeRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)

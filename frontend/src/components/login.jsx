@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from React Router
+import { AuthContext } from '../store/authContext';
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch(`${API_URL}/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +30,9 @@ const Login = () => {
       }
 
       localStorage.setItem('token', data.token); // Save JWT token
-      window.location.href = '/dashboard'; // Redirect user
+      console.log(data);
+      login(data);
+      window.location.href = '/'; // Redirect user
     } catch (error) {
       setLoading(false);
       setError(error.message || 'An error occurred');
