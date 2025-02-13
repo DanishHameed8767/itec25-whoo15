@@ -67,7 +67,9 @@ export const PantryProvider = ({ children }) => {
         headers: { Authorization: `${getToken()}` },
       });
       const data = await res.json();
-      dispatch({ type: "SET_INVENTORY", payload: data.ingredients });
+      if (data.ingredients && data.ingredients.length > 0) {
+        dispatch({ type: "SET_INVENTORY", payload: data.ingredients });
+      }
     } catch (error) {
       addNotification("Error fetching inventory", "error");
       console.error("Error fetching inventory:", error);
@@ -117,7 +119,9 @@ export const PantryProvider = ({ children }) => {
         headers: { Authorization: `${getToken()}` },
       });
       const data = await res.json();
-      dispatch({ type: "SET_RECIPES", payload: data });
+      if (data.length > 0) {
+        dispatch({ type: "SET_RECIPES", payload: data });
+      }
     } catch (error) {
       addNotification("Error fetching recipes", "error");
       console.error("Error fetching recipes:", error);
@@ -131,7 +135,9 @@ export const PantryProvider = ({ children }) => {
         headers: { Authorization: `${getToken()}` },
       });
       const data = await res.json();
-      dispatch({ type: "SET_RECIPES", payload: data.recipes });
+      if (data.recipes && data.recipes.length > 0) {
+        dispatch({ type: "SET_RECIPES", payload: data.recipes });
+      }
       addNotification("Recipes updated based on inventory");
     } catch (error) {
       addNotification("Error fetching recipes based on inventory", "error");
