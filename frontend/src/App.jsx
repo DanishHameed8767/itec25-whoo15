@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router";
 import Home from './Home';
-import Login from './components/Login';
+import Login from './components/login';
 import SignUp from './components/SignUp';
 import Dashboard from './components/dashboard/Dashboard';
 import InventoryList from "./components/Inventory/InventoryList";
